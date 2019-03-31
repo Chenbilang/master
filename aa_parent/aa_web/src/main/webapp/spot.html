@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>景点管理</title>
+<link rel="stylesheet" type="text/css" href="ui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="ui/themes/icon.css">
+<script type="text/javascript" src="ui/jquery.min.js"></script>
+<script type="text/javascript" src="ui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="ui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="ui/jquery.serializejson.min.js"></script>
+<script type="text/javascript" src="ui/date.js"></script>
+<script type="text/javascript" src="js/spotCrud.js"></script>
+<script type="text/javascript">
+	var name="spot";
+	var height = 300;
+	var width = 300;
+	var columns=[[
+                {field:'id',title:'编号',width:100},
+	  		    {field:'province',title:'省份',width:100},
+	  		    {field:'city',title:'景区',width:100},
+	  		    {field:'spot',title:'景点名称',width:100},
+	  		    {field:'spot_time',title:'花费时间',width:100},
+	  		    {field:'spot_ct',title:'评论数',width:100},
+	  		    {field:'spot_gd',title:'好评数',width:100},
+	  		    {field:'spot_bd',title:'差评数',width:100},
+				{field:'-',title:'操作',width:200,formatter: function(value,row,index){
+					var oper = "<a href=\"javascript:void(0)\" onclick=\"edit(" + row.id + ')">修改</a>';
+					oper += ' <a href="javascript:void(0)" onclick="del(' + row.id + ')">删除</a>';
+					return oper;
+				}}
+				]];
+
+</script>
+</head>
+<body>
+<div class="easyui-panel" style="padding-left:4px;border-bottom:0px;">
+	<div style="height:2px;"></div>
+	<form id="searchForm">
+			省份：<input id="province" name="province" >
+			景区：<input id="city" name="city" >
+			花费时间：<input id="spot_time" name="spot_time" >
+	                   景点名称：<input id="spot" name="spot" >
+			
+		<button type="button" id="btnSearch">查询</button>
+	</form>
+	<div style="height:2px;"></div>
+</div>
+<table id="grid"></table>
+
+<div id="editDlg">
+	<form id="editForm">
+			<input name="id" type="hidden"> 
+		<table>
+			<tr>
+				<td>省份</td><td><input name="province" class="easyui-validatebox" data-options="
+					required:true,missingMessage:'省份不能为空!'
+					">
+				</td>
+			</tr>
+			<tr>
+				<td>景区</td><td><input name="city" class="easyui-validatebox" data-options="
+					required:true,missingMessage:'景区不能为空!'
+					">
+				</td>
+			</tr>
+			<tr>
+				<td>景点名称</td><td><input name="spot" class="easyui-validatebox" data-options="
+					required:true,missingMessage:'省不能为空!'
+					">
+				</td>
+			</tr>
+			<tr>
+				<td>花费时间</td><td><input name="spot_time" class="easyui-validatebox" >
+				</td>
+			</tr>
+			<tr>
+				<td>评论数</td><td><input name="spot_ct" class="easyui-validatebox" >
+				</td>
+			</tr>
+			<tr>
+				<td>好评数</td><td><input name="spot_gd" class="easyui-validatebox">
+				</td>
+			</tr>
+			<tr>
+				<td>差评数</td><td><input name="spot_bd" class="easyui-validatebox" >
+				</td>
+			</tr>
+		</table>
+		<button id="btnSave" type="button">保存</button>
+	</form>
+</div>
+
+</body>
+</html>

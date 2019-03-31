@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop.xsd
+		">  
+	
+	
+    <bean id="empAction" class="com.cbl.aa.action.EmpAction" scope="prototype">
+		<property name="empBiz" ref="empBiz"></property>
+	</bean>
+	
+	
+
+	<!-- 菜单 -->
+	<bean id="menuAction" class="com.cbl.aa.action.MenuAction" scope="prototype">
+		<property name="menuBiz" ref="menuBiz"></property>
+		<property name="empBiz" ref="empBiz"></property>
+	</bean>
+	<!-- 角色 -->
+	<bean id="roleAction" class="com.cbl.aa.action.RoleAction" scope="prototype">
+		<property name="roleBiz" ref="roleBiz"></property>
+	</bean>
+	<!-- 景点 -->
+	<bean id="spotAction" class="com.cbl.aa.action.SpotAction" scope="prototype">
+		<property name="spotBiz" ref="spotBiz"></property>
+	</bean>
+	
+
+	<!-- 登陆/退出 -->
+	<bean id="loginAction" class="com.cbl.aa.action.LoginAction" scope="prototype">
+		<!-- <property name="empBiz" ref="empBiz"></property> -->
+	</bean>
+
+</beans>
+	

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <script src="js/echarts.js"></script>
+	    <script type="text/javascript" src="ui/jquery.min.js"></script>
+		<title></title>
+	</head>
+	<body>
+		<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 1000px;height:500px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+       
+        var myChart = echarts.init(document.getElementById('main'));
+// 显示标题，图例和空的坐标轴
+        myChart.setOption({
+            title: {
+                text: '旅游景点人气排行'
+            },
+            tooltip: {},
+            legend: {
+                data:['评论数']
+            },
+            xAxis: {
+                data: []
+            },
+            yAxis: {},
+            series: [{
+                name: '评论数',
+                type: 'bar',
+                data: []
+            }]
+        });
+        
+        // 异步加载数据
+        $.get('spot_getOrderByOne?group=spot_ct').done(function(data) {
+        	
+		    
+			var name = [];
+			var value=[];
+		/* 	for (var i = 0; i < data.length; i++) {
+				
+					value[i] = data[i].value;
+					name[i]=data[i].name;
+				    alert(value[i]);
+				    alert(name[i]);
+				
+			} */
+			$.each($.parseJSON(data),function(i,obj){
+				value[i] = obj.value;
+				name[i]=obj.name;
+			
+			})
+			
+            myChart.setOption({
+                xAxis: {
+                    data: name
+                },
+                series: [{
+                    // 根据名字对应到相应的系列
+                    name: '评论数',
+                    data: value
+                }]
+            });
+        });
+          
+                // 使用刚指定的配置项和数据显示图表。
+ 
+    </script>
+    </body>
+</html>
